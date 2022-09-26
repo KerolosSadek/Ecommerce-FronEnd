@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   urlPath = "http://localhost:3000/"
+  public loginFlag = true
   constructor(private http : HttpClient) { }
 
   register(obj:any):Observable<any>{
@@ -15,4 +16,5 @@ export class AuthService {
   login(obj:any):Observable<any>{
     return this.http.post(`${this.urlPath}user/login`, obj)
   }
+
 }

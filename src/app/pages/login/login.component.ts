@@ -3,6 +3,8 @@ import { AuthService } from './../../services/auth.service';
 import { Login } from './../../interfaces/login';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
     password:""
   }
   errorMsg : string = ""
-  constructor(private auth : AuthService, private router : Router) { }
+  constructor(private auth : AuthService, private router : Router, private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -23,9 +25,11 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.auth.login(this.user).subscribe(res=>{
         console.log(res)
-        this.router.navigateByUrl("/")
-        if(res.apiStatus){
-          // this.toastr.success("hhhh")
+        localStorage.setItem('token' , res.data.token)
+        if(res.apiStatus) {
+          this.toastr.success('Welcome!', 'Logged In!');
+          this.auth.loginFlag = false
+          this.router.navigateByUrl('')
         }
       },(err)=>{
         console.log(err.error.message)
