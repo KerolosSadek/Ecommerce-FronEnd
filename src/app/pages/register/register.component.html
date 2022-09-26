@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Sign Up</h2>
+  <form class="mt-5 w-75" #registerForm="ngForm" (ngSubmit)="handelRegister(registerForm)">
+    <!-- <div class="alert alert-primary">
+      values {{registerForm.value | json}}<br>
+      valid {{registerForm.valid}} <br>
+      invalid {{registerForm.invalid}} <br>
+      touched {{registerForm.touched}} <br>
+      submit {{registerForm.submitted}}
+    </div> -->
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      [(ngModel)]="userData.email" name="email" #email="ngModel" required email>
+      <div class="alert alert-danger" *ngIf="email.invalid && (registerForm.submitted || email.dirty)">
+        <div *ngIf="email.errors?.['required']">
+          Email Is Required
+        </div>
+        <div *ngIf="email.errors?.['email']">
+          Invalid Email
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1"
+      [(ngModel)]="userData.password" name="password" #password="ngModel" required pass>
+      <div class="alert alert-danger" *ngIf="password.invalid && (registerForm.submitted || password.dirty)">
+        <div *ngIf="password.errors?.['required']">
+          Password Is Required
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>

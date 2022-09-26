@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Sign In</h2>
+  <form action="" class="mt-5 w-75" #loginForm="ngForm" (ngSubmit)="handleLogin(loginForm)">
+    <div class="alert alert-danger" *ngIf="errorMsg !=''">
+      {{errorMsg}}
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      [(ngModel)]="user.email" name="email" #email="ngModel" required email (input)="errorMsg = ''">
+      <div class="alert alert-danger" *ngIf="loginForm.submitted && email.invalid">
+        <div *ngIf="email.errors?.['required']">
+          Email Is Required
+        </div>
+        <div *ngIf="email.errors?.['email']">
+          Invalid Email
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1"
+      [(ngModel)]="user.password" name="password" #password="ngModel" required (input)="errorMsg = ''">
+      <div class="alert alert-danger" *ngIf="password.invalid && loginForm.submitted">
+        <div *ngIf="password.errors?.['required']">
+          Password Is Required
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+
