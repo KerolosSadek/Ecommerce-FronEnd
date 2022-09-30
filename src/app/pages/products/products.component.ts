@@ -9,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class ProductsComponent implements OnInit {
   products :any = []
   loadingImg : boolean = true
-  constructor(private global:GlobalService) { }
+  constructor(public global:GlobalService) { }
 
   ngOnInit(): void {
     this.global.getProducts().subscribe(product=>{
       console.log(product);
-      this.products = product.date
+      this.products = product.data
     },(err)=>{
       console.log(err)
     },()=>{

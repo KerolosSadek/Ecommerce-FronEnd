@@ -16,7 +16,7 @@ export class SingleProductComponent implements OnInit {
     this.productId = this.activated.snapshot.paramMap.get("productId")
 
     this.global.getSingleProduct(this.productId).subscribe(product=>{
-      this.singleProduct = product.date
+      this.singleProduct = product.data
       console.log(this.singleProduct)
     })
   }
